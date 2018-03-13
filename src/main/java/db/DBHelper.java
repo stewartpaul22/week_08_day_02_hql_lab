@@ -1,10 +1,13 @@
 package db;
 
+import models.Child;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Sort;
+import org.hibernate.loader.custom.Return;
 
 import java.util.List;
 
@@ -27,6 +30,25 @@ public class DBHelper {
             session.close();
         }
     }
+
+    // List all of the children.
+    public static <T> List<T> getAllChildren(Class classType) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<T> results = null;
+        Criteria criteria = session.createCriteria(classType);
+        results = getList(criteria);
+        return results;
+    }
+
+    // Find a child by name
+    public static <T> T findByName(Class classType, String name) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        
+    }
+
+    // Sort the children by Age.
+
+    // Return only children with Soprano range.
 
     public static <T> List<T> getList(Criteria cr) {
         List<T> results = null;
@@ -58,4 +80,5 @@ public class DBHelper {
         }
         return result;
     }
+
 }

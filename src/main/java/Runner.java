@@ -1,6 +1,8 @@
 import db.DBHelper;
 import models.Child;
 
+import java.util.List;
+
 public class Runner {
 
     public static void main(String[] args) {
@@ -20,6 +22,8 @@ public class Runner {
         DBHelper.save(brigitta);
         DBHelper.save(marta);
         DBHelper.save(gretl);
+
+        List<Child> childList = DBHelper.getAllChildren(Child.class);
 
     }
 }
