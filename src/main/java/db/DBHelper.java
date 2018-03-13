@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import org.hibernate.Transaction;
 import org.hibernate.annotations.Sort;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.loader.custom.Return;
 
 import java.util.List;
@@ -43,7 +44,19 @@ public class DBHelper {
     // Find a child by name
     public static <T> T findByName(Class classType, String name) {
         session = HibernateUtil.getSessionFactory().openSession();
-        
+        T result = null;
+        try {
+            transaction = session.beginTransaction();
+            Criteria cr = session.createCriteria(classType);
+            cr.add(Restrictions.eq("name", name));
+            result = (T)cr.uniqueResult();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return result;
     }
 
     // Sort the children by Age.

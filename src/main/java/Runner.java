@@ -25,5 +25,7 @@ public class Runner {
 
         List<Child> childList = DBHelper.getAllChildren(Child.class);
 
+        Child foundChild = DBHelper.findByName(Child.class, liesl.getName());
+
     }
 }
