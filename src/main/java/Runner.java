@@ -35,5 +35,7 @@ public class Runner {
 
         List<Child> childrenByRange = DBHelper.childrenByVocalRange("Soprano");
 
-    }
+        List<Child> childrenBelowAge = DBHelper.childrenBelowAge(10);
+
+u    }
 }

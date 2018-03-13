@@ -93,6 +93,18 @@ public class DBHelper {
         return results;
     }
 
+    // Return children under 10
+    public static List<Child> childrenBelowAge(int age) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Child> results = null;
+
+        Criteria cr = session.createCriteria(Child.class);
+        cr.add(Restrictions.lt("age", age));
+        results = cr.list();
+
+        return results;
+    }
+
 
     public static <T> List<T> getList(Criteria cr) {
         List<T> results = null;
