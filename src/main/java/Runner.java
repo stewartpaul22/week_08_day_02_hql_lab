@@ -27,5 +27,7 @@ public class Runner {
 
         Child foundChild = DBHelper.findByName(Child.class, liesl.getName());
 
+        List<Child> childrenByAge = DBHelper.orderByAge();
+
     }
 }

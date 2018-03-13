@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import org.hibernate.Transaction;
 import org.hibernate.annotations.Sort;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.loader.custom.Return;
 
@@ -45,21 +46,24 @@ public class DBHelper {
     public static <T> T findByName(Class classType, String name) {
         session = HibernateUtil.getSessionFactory().openSession();
         T result = null;
-        try {
-            transaction = session.beginTransaction();
-            Criteria cr = session.createCriteria(classType);
-            cr.add(Restrictions.eq("name", name));
-            result = (T)cr.uniqueResult();
-        } catch (HibernateException e) {
-            transaction.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+
+        Criteria cr = session.createCriteria(classType);
+        cr.add(Restrictions.eq("name", name));
+        result = (T)cr.uniqueResult();
+
         return result;
     }
 
     // Sort the children by Age.
+    public static List<Child> orderByAge() {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Child> results = null;
+
+        Criteria cr = session.createCriteria(Child.class);
+        cr.addOrder(Order.asc("age"));
+        results = cr.list();
+        return results;
+    }
 
     // Return only children with Soprano range.
 
