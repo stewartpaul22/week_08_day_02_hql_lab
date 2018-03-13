@@ -23,6 +23,10 @@ public class Runner {
         DBHelper.save(marta);
         DBHelper.save(gretl);
 
+        friedrich.setAge(15);
+        friedrich.setRange("Bass");
+        DBHelper.update(friedrich);
+
         List<Child> childList = DBHelper.getAllChildren(Child.class);
 
         Child foundChild = DBHelper.findByName(Child.class, liesl.getName());

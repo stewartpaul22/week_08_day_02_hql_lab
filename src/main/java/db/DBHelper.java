@@ -33,6 +33,22 @@ public class DBHelper {
         }
     }
 
+    // UPDATE
+    public static void update(Object object) {
+
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.update(object);
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
     // List all of the children.
     public static <T> List<T> getAllChildren(Class classType) {
         session = HibernateUtil.getSessionFactory().openSession();
