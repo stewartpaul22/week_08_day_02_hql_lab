@@ -29,5 +29,7 @@ public class Runner {
 
         List<Child> childrenByAge = DBHelper.orderByAge();
 
+        List<Child> childrenByRange = DBHelper.childrenByVocalRange("Soprano");
+
     }
 }

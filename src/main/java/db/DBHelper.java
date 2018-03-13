@@ -66,6 +66,17 @@ public class DBHelper {
     }
 
     // Return only children with Soprano range.
+    public static List<Child> childrenByVocalRange(String range) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Child> results = null;
+
+        Criteria cr = session.createCriteria(Child.class);
+        cr.add(Restrictions.eq("range", range));
+        results = cr.list();
+
+        return results;
+    }
+
 
     public static <T> List<T> getList(Criteria cr) {
         List<T> results = null;
